@@ -11,6 +11,13 @@ namespace CardReality.Data
 {
     public class MigrationStrategy : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
     {
+        public static readonly List<Card> InitialCards = new List<Card>()
+            {
+                new Card() {AttackPoints = 1000, DefensePoints = 200, IsSpecial = false, Name = "DM", SpecialEffect = 0},
+                new Card() {AttackPoints = 800, DefensePoints = 300, IsSpecial = false, Name = "WD", SpecialEffect = 0},
+                new Card() {AttackPoints = 1200, DefensePoints = 1000, IsSpecial = false, Name = "KUF", SpecialEffect = 0}
+            };
+
         protected override void Seed(ApplicationDbContext context)
         {
             List<Letter> letters = new List<Letter>()
@@ -147,12 +154,7 @@ namespace CardReality.Data
                }
             };
 
-            List<Card> cards = new List<Card>()
-            {
-                new Card() {AttackPoints = 1000, DefensePoints = 200, IsSpecial = false, Name = "DM", SpecialEffect = 0},
-                new Card() {AttackPoints = 800, DefensePoints = 300, IsSpecial = false, Name = "WD", SpecialEffect = 0},
-                new Card() {AttackPoints = 1200, DefensePoints = 1000, IsSpecial = false, Name = "KUF", SpecialEffect = 0}
-            };
+            
 
             //var hasher = new PasswordHasher();
             //Player player = new Player()
@@ -190,7 +192,7 @@ namespace CardReality.Data
 
 
             ((DbSet<Letter>)context.Letters).AddRange(letters);
-            ((DbSet<Card>) context.Cards).AddRange(cards);
+            ((DbSet<Card>) context.Cards).AddRange(InitialCards);
            // ((DbSet<PlayerCard>)context.PlayerCards).AddRange(pcards);
         }
     }

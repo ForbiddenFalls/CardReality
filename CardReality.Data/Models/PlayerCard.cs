@@ -16,5 +16,7 @@ namespace CardReality.Data.Models
 
         public virtual Player Player { get; set; }
         public string PlayerId { get; set; }
+
+        public int BoughtFor { get; set; }
     }
 }

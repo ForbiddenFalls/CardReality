@@ -66,8 +66,8 @@ namespace CardReality.Controllers
         [HttpGet]
         public ActionResult Buy(int id)
         {
-            var cardsService = new CardsService(this.Data);
-            var data = this.Data.Offers.Find(id);
+            CardsService cardsService = new CardsService(this.Data);
+            Market data = this.Data.Offers.Find(id);
 
             if (data == null)
             {
@@ -111,12 +111,12 @@ namespace CardReality.Controllers
             PlayerCard cardPosession = new PlayerCard()
             {
                 Card = card,
-                Player = player
+                Player = player,
+                BoughtFor = data.Price
             };
 
             player.Deck.Add(cardPosession);
             this.Data.PlayerCards.Add(cardPosession);
-
             this.Data.Offers.Remove(data);
 
             if (this.Data.SaveChanges() > 0)

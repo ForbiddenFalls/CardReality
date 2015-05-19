@@ -1,25 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using CardReality.Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CardReality.Data.Models;
 using CardReality.Models;
+using System.Data.Entity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CardReality.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public AccountController()
+        public AccountController() : base()
         {
         }
 
@@ -153,11 +157,18 @@ namespace CardReality.Controllers
             if (ModelState.IsValid)
             {
                 var user = new Player { UserName = model.Email, Email = model.Email };
+                foreach (var card in MigrationStrategy.InitialCards)
+                {
+                    user.Deck.Add(new PlayerCard()
+                    {
+                        Card = this.Data.Cards.FirstOrDefault(c => c.Name == card.Name)
+                    });
+                }
+                
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

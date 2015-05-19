@@ -33,6 +33,7 @@ namespace CardReality.Data.Models
         public Card()
         {
             this.Owners = new HashSet<PlayerCard>();
+            this.IsSpecial = false;
         }
     }
 }

@@ -40,7 +40,7 @@ namespace CardReality.Data.Models
 
         public Player()
         {
-            this.Deck = new HashSet<PlayerCard>();
+            this.Deck = new List<PlayerCard>();
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Player> manager)

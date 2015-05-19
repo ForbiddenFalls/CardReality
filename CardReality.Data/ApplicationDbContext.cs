@@ -14,7 +14,9 @@ namespace CardReality.Data
         public IDbSet<Card> Cards { get; set; }
         public IDbSet<Letter> Letters { get; set; }
         public IDbSet<Market> Offers { get; set; }
-        public IDbSet<PlayerCard> PlayerCards { get; set; } 
+        public IDbSet<PlayerCard> PlayerCards { get; set; }
+
+        private static ApplicationDbContext instance = null;
 
         public ApplicationDbContext()
             : base("DefaultConnection")
@@ -24,7 +26,11 @@ namespace CardReality.Data
 
         public static ApplicationDbContext Create()
         {
-            return new ApplicationDbContext();
+            if (instance == null)
+            {
+                instance = new ApplicationDbContext();
+            }
+            return instance;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

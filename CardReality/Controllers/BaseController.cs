@@ -13,7 +13,7 @@ namespace CardReality.Controllers
 
         public BaseController()
         {
-            this.Data = new ApplicationDbContext();
+            this.Data = ApplicationDbContext.Create();
         }
     }
 }
