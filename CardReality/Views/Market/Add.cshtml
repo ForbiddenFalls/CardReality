@@ -1,0 +1,27 @@
+﻿@model IEnumerable<CardReality.Data.Models.PlayerCard>
+
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>Add</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<form action="/market/addoffer" method="post">
+    <select name="card">
+        <option value="0">-- Select a card --</option>
+        @foreach (var item in Model)
+        {
+            <option value="@Html.DisplayFor(modelItem => item.Card.Id)">
+                @Html.DisplayFor(modelItem => item.Card.Name)
+            </option>
+        }
+    </select>
+
+    <input type="text" name="price" value="0" />
+
+    <input type="submit" name="submit" value="sell" />
+</form>
