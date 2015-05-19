@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CardReality.Data.Models;
+using CardReality.Enums;
 using CardReality.Models;
+using CardReality.Services;
 using Microsoft.AspNet.Identity;
 
 namespace CardReality.Controllers
@@ -32,16 +34,16 @@ namespace CardReality.Controllers
         public ActionResult AddOffer()
         {
             Player player = this.Data.Users.Find(User.Identity.GetUserId());
-            var cardId = int.Parse(this.Request.Form.Get("card"));
-            var price = int.Parse(this.Request.Form.Get("price"));
+            int cardId = int.Parse(this.Request.Form.Get("card"));
+            int price = int.Parse(this.Request.Form.Get("price"));
 
             PlayerCard card = player.Deck.FirstOrDefault(c => c.Card.Id == cardId);
 
             if (card == null)
             {
-                throw new Exception("You do not own this card");
+                throw new Exception(LocalizationService.Translate(Message.CardNotOwner));
             }
- 
+
             Market offer = new Market()
             {
                 CardName = card.Card.Name,
@@ -49,37 +51,39 @@ namespace CardReality.Controllers
                 Price = price,
                 SoldOn = DateTime.Now
             };
-            this.Data.PlayerCards.Remove(card);
 
+            this.Data.PlayerCards.Remove(card);
             this.Data.Offers.Add(offer);
 
             if (this.Data.SaveChanges() > 0)
             {
                 return RedirectToAction("Add");
             }
-            throw new Exception("Card has not been sold");
+
+            throw new Exception(LocalizationService.Translate(Message.CardNotSold));
         }
 
         [HttpGet]
         public ActionResult Buy(int id)
         {
+            var cardsService = new CardsService(this.Data);
             var data = this.Data.Offers.Find(id);
 
             if (data == null)
             {
-                throw new Exception("Invalid offer");
+                throw new Exception(LocalizationService.Translate(Message.CardInvalidOffer));
             }
 
             Player player = this.Data.Users.Find(User.Identity.GetUserId());
 
             if (player.Money < data.Price)
             {
-                throw new Exception("Not enough money");
+                throw new Exception(LocalizationService.Translate(Message.NotEnoughMoney));
             }
 
             if (player.Id == data.Owner.Id)
             {
-                throw new Exception("Cannot buy your own offer");
+                throw new Exception(LocalizationService.Translate(Message.CardSameOwner));
             }
 
             player.Money -= data.Price;
@@ -88,20 +92,20 @@ namespace CardReality.Controllers
             Card card = this.Data.Cards.FirstOrDefault(c => c.Name == data.CardName);
             if (card == null)
             {
-                bool hasSpecialEffect = this.IsSpecial();
+                bool hasSpecialEffect = cardsService.IsSpecial();
 
                 card = new Card()
                 {
                     Name = data.CardName,
-                    AttackPoints = this.CalculateAttackPoints(data.CardName),
-                    DefensePoints = this.CalculateDefensePoints(data.CardName),
+                    AttackPoints = cardsService.CalculateAttackPoints(data.CardName),
+                    DefensePoints = cardsService.CalculateDefensePoints(data.CardName),
                     IsSpecial = hasSpecialEffect
                 };
                 if (hasSpecialEffect)
                 {
-                    card.SpecialEffect = this.GetSpecialEffect();
+                    card.SpecialEffect = cardsService.GetSpecialEffect();
                 }
-                this.Data.Cards.Add(card);            
+                this.Data.Cards.Add(card);
             }
 
             PlayerCard cardPosession = new PlayerCard()
@@ -119,54 +123,9 @@ namespace CardReality.Controllers
             {
                 return this.RedirectToAction("index");
             }
-            throw new Exception("Cannot buy offer");
+
+            throw new Exception(LocalizationService.Translate(Message.OfferNotBought));
         }
 
-        private int CalculateAttackPoints(string cardName)
-        {
-            double sum = 0;
-            var letters = cardName.ToCharArray().Select(c => c.ToString());
-            foreach (string letter in letters)
-            {
-                var letterData = this.Data.Letters.FirstOrDefault(l => l.Char.ToLower() == letter);
-                if (letterData == null) continue;
-
-                sum += letterData.Weight;
-            }
-
-            return (int) sum;
-        }
-
-        private int CalculateDefensePoints(string cardName)
-        {
-            Random rnd = new Random();
-            double sum = 0;
-            var letters = cardName.ToCharArray().Select(c => c.ToString());
-            foreach (string letter in letters)
-            {
-                var letterData = this.Data.Letters.FirstOrDefault(l => l.Char.ToLower() == letter);
-                if (letterData == null) continue;
-
-                sum += letterData.Weight*((double)rnd.Next(3, 16)/10);
-            }
-
-            return (int)sum;
-        }
-
-        private bool IsSpecial()
-        {
-            Random rnd = new Random();
-            int result = rnd.Next(1, 101);
-
-            return result <= 20;
-        }
-
-        private SpecialEffect GetSpecialEffect()
-        {
-            Random rnd = new Random();
-            List<SpecialEffect> effects = Enum.GetValues(typeof (SpecialEffect)).Cast<SpecialEffect>().ToList();
-
-            return effects[rnd.Next(0, effects.Count)];
-        }
     }
 }
