@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using CardReality.Data;
+using CardReality.Data.Data;
 using CardReality.Data.Models;
 
 namespace CardReality.Services
@@ -15,7 +16,7 @@ namespace CardReality.Services
         public const int SpecialCardDropChance = 20;
 
 
-        public CardsService(ApplicationDbContext data) : base(data)
+        public CardsService(IApplicationData data) : base(data)
         {
         }
 
@@ -26,7 +27,7 @@ namespace CardReality.Services
 
             foreach (string letter in letters)
             {
-                var letterData = this.Data.Letters.FirstOrDefault(l => l.Char.ToLower() == letter);
+                var letterData = this.Data.Letters.All().FirstOrDefault(l => l.Char.ToLower() == letter);
                 if (letterData == null) continue;
 
                 sum += letterData.Weight;
@@ -43,7 +44,7 @@ namespace CardReality.Services
 
             foreach (string letter in letters)
             {
-                var letterData = this.Data.Letters.FirstOrDefault(l => l.Char.ToLower() == letter);
+                var letterData = this.Data.Letters.All().FirstOrDefault(l => l.Char.ToLower() == letter);
                 if (letterData == null) continue;
 
                 sum += letterData.Weight * (

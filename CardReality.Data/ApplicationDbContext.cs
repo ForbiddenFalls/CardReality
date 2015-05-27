@@ -1,28 +1,25 @@
-﻿using CardReality.Data.Models;
-using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CardReality.Data
+﻿namespace CardReality.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<Player>
-    {
-        public IDbSet<Card> Cards { get; set; }
-        public IDbSet<Letter> Letters { get; set; }
-        public IDbSet<Market> Offers { get; set; }
-        public IDbSet<PlayerCard> PlayerCards { get; set; }
+    using System.Data.Entity;
 
+    using Microsoft.AspNet.Identity.EntityFramework;
+
+    using CardReality.Data.Models;
+
+    public class ApplicationDbContext : IdentityDbContext<Player>, IApplicationDbContext
+    {
         private static ApplicationDbContext instance = null;
 
-        public ApplicationDbContext()
+        private ApplicationDbContext()
             : base("DefaultConnection")
         {
             Database.SetInitializer(new MigrationStrategy());
         }
+
+        public IDbSet<Card> Cards { get; set; }
+        public IDbSet<Letter> Letters { get; set; }
+        public IDbSet<Market> Offers { get; set; }
+        public IDbSet<PlayerCard> PlayerCards { get; set; }
 
         public static ApplicationDbContext Create()
         {

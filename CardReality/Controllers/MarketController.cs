@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using CardReality.Data.Data;
 using CardReality.Data.Models;
 using CardReality.Enums;
-using CardReality.Models;
 using CardReality.Services;
 using Microsoft.AspNet.Identity;
 
@@ -13,10 +12,15 @@ namespace CardReality.Controllers
 {
     public class MarketController : BaseController
     {
+        
         // GET: Market
+        public MarketController(IApplicationData data) : base(data)
+        {
+        }
+
         public ActionResult Index()
         {
-            var offers = this.Data.Offers;
+            var offers = this.Data.Offers.All();
 
             return View(offers);
         }
@@ -24,7 +28,7 @@ namespace CardReality.Controllers
         [HttpGet]
         public ActionResult Add()
         {
-            Player player = this.Data.Users.Find(User.Identity.GetUserId());
+            Player player = this.Data.Players.Find(User.Identity.GetUserId());
             var cards = player.Deck;
 
             return View(cards);
@@ -33,7 +37,7 @@ namespace CardReality.Controllers
         [HttpPost]
         public ActionResult AddOffer()
         {
-            Player player = this.Data.Users.Find(User.Identity.GetUserId());
+            Player player = this.Data.Players.Find(User.Identity.GetUserId());
             int cardId = int.Parse(this.Request.Form.Get("card"));
             int price = int.Parse(this.Request.Form.Get("price"));
 
@@ -52,7 +56,7 @@ namespace CardReality.Controllers
                 SoldOn = DateTime.Now
             };
 
-            this.Data.PlayerCards.Remove(card);
+            this.Data.PlayerCards.Delete(card);
             this.Data.Offers.Add(offer);
 
             if (this.Data.SaveChanges() > 0)
@@ -74,7 +78,7 @@ namespace CardReality.Controllers
                 throw new Exception(LocalizationService.Translate(Message.CardInvalidOffer));
             }
 
-            Player player = this.Data.Users.Find(User.Identity.GetUserId());
+            Player player = this.Data.Players.Find(User.Identity.GetUserId());
 
             if (player.Money < data.Price)
             {
@@ -89,7 +93,7 @@ namespace CardReality.Controllers
             player.Money -= data.Price;
             data.Owner.Money += data.Price;
 
-            Card card = this.Data.Cards.FirstOrDefault(c => c.Name == data.CardName);
+            Card card = this.Data.Cards.All().FirstOrDefault(c => c.Name == data.CardName);
             if (card == null)
             {
                 bool hasSpecialEffect = cardsService.IsSpecial();
@@ -117,7 +121,7 @@ namespace CardReality.Controllers
 
             player.Deck.Add(cardPosession);
             this.Data.PlayerCards.Add(cardPosession);
-            this.Data.Offers.Remove(data);
+            this.Data.Offers.Delete(data);
 
             if (this.Data.SaveChanges() > 0)
             {

@@ -4,16 +4,17 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using CardReality.Data;
+using CardReality.Data.Data;
 
 namespace CardReality.Services
 {
     public abstract class Service
     {
-        public ApplicationDbContext Data { get; private set; }
+        public IApplicationData Data { get; private set; }
 
-        public Service(ApplicationDbContext context)
+        public Service(IApplicationData data)
         {
-            this.Data = context;
+            this.Data = data;
         }
     }
 }

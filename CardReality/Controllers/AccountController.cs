@@ -13,6 +13,7 @@ using Microsoft.Owin.Security;
 using CardReality.Data.Models;
 using CardReality.Models;
 using System.Data.Entity;
+using CardReality.Data.Data;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CardReality.Controllers
@@ -23,11 +24,13 @@ namespace CardReality.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public AccountController() : base()
+        public AccountController(IApplicationData data) 
+            : base(data)
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager ) 
+            : base(new ApplicationData(ApplicationDbContext.Create()))
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -161,7 +164,7 @@ namespace CardReality.Controllers
                 {
                     user.Deck.Add(new PlayerCard()
                     {
-                        Card = this.Data.Cards.FirstOrDefault(c => c.Name == card.Name)
+                        Card = this.Data.Cards.All().FirstOrDefault(c => c.Name == card.Name)
                     });
                 }
                 
