@@ -172,6 +172,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\CardsController.cs" />
+    <Compile Include="Controllers\RankingController.cs" />
     <Compile Include="Enums\Language.cs" />
     <Compile Include="Enums\Message.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -249,6 +250,7 @@
     <Content Include="Views\Market\Index.cshtml" />
     <Content Include="Views\Market\Add.cshtml" />
     <Content Include="Views\Cards\Index.cshtml" />
+    <Content Include="Views\Ranking\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />
