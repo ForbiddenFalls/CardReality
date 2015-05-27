@@ -35,6 +35,7 @@ namespace CardReality.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddOffer()
         {
             Player player = this.Data.Players.Find(User.Identity.GetUserId());
