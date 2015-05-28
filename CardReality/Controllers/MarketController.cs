@@ -13,11 +13,11 @@ namespace CardReality.Controllers
     public class MarketController : BaseController
     {
         
-        // GET: Market
         public MarketController(IApplicationData data) : base(data)
         {
         }
 
+        // GET: Market
         public ActionResult Index()
         {
             var offers = this.Data.Offers.All();

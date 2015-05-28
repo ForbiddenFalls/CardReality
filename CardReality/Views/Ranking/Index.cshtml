@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CardReality.Data.Models.Player>
+﻿@model IEnumerable<CardReality.Models.RankingViewModel>
 
 @{
     ViewBag.Title = "Ranking";
@@ -6,36 +6,56 @@
 
 <h2>Ranking</h2>
 
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" placeholder="Search By UserName"/>
+    </p>
+}
+
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Rank)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.UserName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Wins)
+            @Html.ActionLink("Win Ratio", "Index", new { sortOrder = ViewBag.RatioSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Loss)
+            @Html.ActionLink("Wins", "Index", new { sortOrder = ViewBag.WinsSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Loss", "Index", new { sortOrder = ViewBag.LossSortParm })
         </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Wins)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Loss)
-                </td>
-                <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.Id })
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rank)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ratio) %
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Wins)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Loss)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new {id = item.Id} )
+            </td>
+        </tr>
     }
 
 </table>

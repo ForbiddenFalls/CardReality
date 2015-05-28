@@ -186,6 +186,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OfferBindingModel.cs" />
+    <Compile Include="Models\RankingViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CardsService.cs" />
     <Compile Include="Services\LocalizationService.cs" />
