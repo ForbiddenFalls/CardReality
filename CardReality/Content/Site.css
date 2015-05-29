@@ -22,3 +22,25 @@ select,
 textarea {
     max-width: 280px;
 }
+
+img {
+    width: 100%;
+}
+
+.home-container {
+    margin-top:15px;
+}
+
+.homepage-intro {
+
+}
+
+.homepage-intro p {
+    margin-top: 5px;
+    padding: 5px;
+    padding-left: 10px;
+}
+
+.nav button {
+    margin-top:12px;
+}

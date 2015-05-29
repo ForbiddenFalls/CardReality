@@ -24,7 +24,7 @@ namespace CardReality
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-paper-theme.css",
                       "~/Content/site.css"));
         }
     }
