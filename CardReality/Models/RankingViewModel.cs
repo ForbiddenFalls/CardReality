@@ -18,5 +18,6 @@ namespace CardReality.Models
         public double Ratio { get; set; }
 
         public int Rank { get; set; }
+
     }
 }

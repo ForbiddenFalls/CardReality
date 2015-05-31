@@ -1,4 +1,6 @@
-﻿@model IEnumerable<CardReality.Models.RankingViewModel>
+﻿@model PagedList.IPagedList<CardReality.Models.RankingViewModel>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Ranking";
@@ -9,18 +11,19 @@
 @using (Html.BeginForm())
 {
     <p>
-        Find by name: @Html.TextBox("SearchString")
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" placeholder="Search By UserName"/>
+
     </p>
 }
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Rank)
+            Rank           
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UserName)
+            Username
         </th>
         <th>
             @Html.ActionLink("Win Ratio", "Index", new { sortOrder = ViewBag.RatioSortParm })
@@ -40,8 +43,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Rank)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
+            <td title="">
+                @Html.ActionLink(item.UserName, null, null, new { @class = "player-username" })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Ratio) %
@@ -53,9 +56,35 @@
                 @Html.DisplayFor(modelItem => item.Loss)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new {id = item.Id} )
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
             </td>
         </tr>
     }
 
 </table>
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+@section scripts {
+    <script>
+        $(document).ready(function() {
+            $(".player-username").hover(function() {
+                var element = this;
+                $.getJSON("/Ranking/GetPlayerData", { userName: $(this).text() }, function(data) {
+                    var content = '<img src="http://frankfortecig.com/wp-content/uploads/2014/07/placeholder-Copy-2.gif" alt="pic" height="42" width="42"><br/><p>'
+                        + data.Username
+                        + '</p>';
+                    $(element).attr("title", content);
+                    $(element).tooltip({
+                        html: true,
+                        content: function() {
+                            var tooltipContent = $('<div />').html($.parseHTML($(this).attr('title')));
+                            return tooltipContent;
+                        }
+                    });
+                    $(element).attr("title", "");
+                });
+            });
+        });
+    </script>
+}
