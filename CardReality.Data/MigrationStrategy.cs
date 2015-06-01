@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CardReality.Data
 {
@@ -20,6 +21,34 @@ namespace CardReality.Data
 
         protected override void Seed(ApplicationDbContext context)
         {
+            var adminPassword = "#Lo6omie";
+            var adminUser = new Player
+            {
+                UserName = "administrator",
+                Email = "admin@admin.com"
+            };
+
+            var userStore = new UserStore<Player>(context);
+            var userManager = new UserManager<Player>(userStore);
+            var adminCreateResult = userManager.Create(adminUser, adminPassword);
+            if (!adminCreateResult.Succeeded)
+            {
+                throw new Exception(string.Join(",", adminCreateResult.Errors));
+                
+            }
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var adminRoleCreateResult = roleManager.Create(new IdentityRole("Administrator"));
+            if (!adminRoleCreateResult.Succeeded)
+            {
+                throw new Exception(string.Join(",", adminRoleCreateResult.Errors));
+            }
+
+            var adminRoleResult = userManager.AddToRole(adminUser.Id, "Administrator");
+            if (!adminRoleResult.Succeeded)
+            {
+                throw new Exception(string.Join(",", adminRoleResult.Errors));
+            }
+
             List<Letter> letters = new List<Letter>()
             {
                new Letter() 
@@ -152,9 +181,7 @@ namespace CardReality.Data
                    Char = "z",
                    Weight = 4
                }
-            };
-
-            
+            };    
 
             //var hasher = new PasswordHasher();
             //Player player = new Player()
