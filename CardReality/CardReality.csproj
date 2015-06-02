@@ -178,6 +178,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CardsController.cs" />
     <Compile Include="Controllers\RankingController.cs" />
     <Compile Include="Enums\Language.cs" />
@@ -300,6 +301,11 @@
     <Content Include="Views\Market\Add.cshtml" />
     <Content Include="Views\Cards\Index.cshtml" />
     <Content Include="Views\Ranking\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Cards.cshtml" />
+    <Content Include="Views\Admin\Users.cshtml" />
+    <Content Include="Views\Admin\Letters\Index.cshtml" />
+    <Content Include="Views\Admin\Letters\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />

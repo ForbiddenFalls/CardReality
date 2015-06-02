@@ -12,6 +12,12 @@ namespace CardReality.Data
 {
     public class MigrationStrategy : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
     {
+        private const string AdminRole = "Administrator";
+        private const string AdminUserName = "admin";
+        private const string AdminEmail = "admin@admin.com";
+        private const string AdminPassword = "#Lo6omie";
+
+
         public static readonly List<Card> InitialCards = new List<Card>()
             {
                 new Card() {AttackPoints = 1000, DefensePoints = 200, IsSpecial = false, Name = "DM", SpecialEffect = 0},
@@ -21,33 +27,7 @@ namespace CardReality.Data
 
         protected override void Seed(ApplicationDbContext context)
         {
-            var adminPassword = "#Lo6omie";
-            var adminUser = new Player
-            {
-                UserName = "administrator",
-                Email = "admin@admin.com"
-            };
-
-            var userStore = new UserStore<Player>(context);
-            var userManager = new UserManager<Player>(userStore);
-            var adminCreateResult = userManager.Create(adminUser, adminPassword);
-            if (!adminCreateResult.Succeeded)
-            {
-                throw new Exception(string.Join(",", adminCreateResult.Errors));
-                
-            }
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            var adminRoleCreateResult = roleManager.Create(new IdentityRole("Administrator"));
-            if (!adminRoleCreateResult.Succeeded)
-            {
-                throw new Exception(string.Join(",", adminRoleCreateResult.Errors));
-            }
-
-            var adminRoleResult = userManager.AddToRole(adminUser.Id, "Administrator");
-            if (!adminRoleResult.Succeeded)
-            {
-                throw new Exception(string.Join(",", adminRoleResult.Errors));
-            }
+            CreateAdminUser(context, AdminRole, AdminUserName, AdminEmail, AdminPassword);
 
             List<Letter> letters = new List<Letter>()
             {
@@ -216,11 +196,40 @@ namespace CardReality.Data
             //    }
             //};
             
-
-
             ((DbSet<Letter>)context.Letters).AddRange(letters);
             ((DbSet<Card>) context.Cards).AddRange(InitialCards);
            // ((DbSet<PlayerCard>)context.PlayerCards).AddRange(pcards);
+        }
+
+        private void CreateAdminUser(ApplicationDbContext context, string role, string userName, string email, string password)
+        {
+            var adminUser = new Player
+            {
+                UserName = userName,
+                Email = email
+            };
+
+            var userStore = new UserStore<Player>(context);
+            var userManager = new UserManager<Player>(userStore);
+            var adminCreateResult = userManager.Create(adminUser, password);
+            if (!adminCreateResult.Succeeded)
+            {
+                throw new Exception(string.Join(",", adminCreateResult.Errors));
+
+            }
+
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var adminRoleCreateResult = roleManager.Create(new IdentityRole(role));
+            if (!adminRoleCreateResult.Succeeded)
+            {
+                throw new Exception(string.Join(",", adminRoleCreateResult.Errors));
+            }
+
+            var adminRoleResult = userManager.AddToRole(adminUser.Id, role);
+            if (!adminRoleResult.Succeeded)
+            {
+                throw new Exception(string.Join(",", adminRoleResult.Errors));
+            }
         }
     }
 }
