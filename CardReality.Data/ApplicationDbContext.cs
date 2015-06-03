@@ -1,4 +1,7 @@
-﻿namespace CardReality.Data
+﻿using System;
+using System.Threading.Tasks;
+
+namespace CardReality.Data
 {
     using System.Data.Entity;
 
@@ -20,13 +23,26 @@
         public IDbSet<Letter> Letters { get; set; }
         public IDbSet<Market> Offers { get; set; }
         public IDbSet<PlayerCard> PlayerCards { get; set; }
+        public IDbSet<BattlePool> BattlePool { get; set; }
+        public IDbSet<Battle> Battles { get; set; }
+        public IDbSet<FieldState> FieldState { get; set; }
+        public IDbSet<BattleHand> BattleHands { get; set; } 
+
+        private static object syncRoot = new Object();
 
         public static ApplicationDbContext Create()
         {
             if (instance == null)
             {
-                instance = new ApplicationDbContext();
+                lock (syncRoot)
+                {
+                    if (instance == null)
+                    {
+                        instance = new ApplicationDbContext();
+                    }   
+                }
             }
+
             return instance;
         }
 

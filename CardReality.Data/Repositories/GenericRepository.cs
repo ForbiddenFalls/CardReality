@@ -1,4 +1,6 @@
-﻿namespace CardReality.Data.Repositories
+﻿using System.Threading.Tasks;
+
+namespace CardReality.Data.Repositories
 {
     using System.Data.Entity;
 
@@ -53,6 +55,12 @@
         public int SaveChanges()
         {
             return this.context.SaveChanges();
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await this.context.SaveChangesAsync();
+            
         }
 
         private void ChangeState(T entity, EntityState state)

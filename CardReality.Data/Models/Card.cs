@@ -30,6 +30,8 @@ namespace CardReality.Data.Models
 
         public virtual ICollection<PlayerCard> Owners { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public Card()
         {
             this.Owners = new HashSet<PlayerCard>();

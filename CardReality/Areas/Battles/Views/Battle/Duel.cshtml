@@ -1,0 +1,106 @@
+﻿@using CardReality.Areas.Battles.Controllers
+@using CardReality.Data.Models
+@using Microsoft.AspNet.Identity
+@model CardReality.Data.Models.Battle
+@{
+    bool isAttacker = HttpContext.Current.User.Identity.GetUserId() == Model.Attacker.Id;
+    var currentPlayer = isAttacker ? Model.Attacker : Model.Defender;
+    var onTurn = Model.CurrentPlayer.Id == Model.Attacker.Id ? Model.Attacker : Model.Defender;
+    var cards = Model.Hands.Where(h => h.Owner.Id == Model.CurrentPlayer.Id);
+}
+@{
+    ViewBag.Title = "Duel";
+}
+<style>
+    .current {
+        color: #ff0000;
+    }
+    .foreign-card {
+        color: #ff0000;
+    }
+</style>
+
+@section scripts{
+    @Scripts.Render("~/Scripts/jquery.signalR-2.2.0.min.js")
+    @Scripts.Render("~/signalr/hubs")
+
+<script>
+    var battle = $.connection.battleHub;
+    var attackerId = "@Model.Attacker.Id";
+    var defenderId = "@Model.Defender.Id";
+    var battleId = Number("@Model.Id");
+    var selectedCard = null;
+
+    var turnDate = new Date("@Model.TurnStartedOn.AddSeconds(BattleController.TurnDelay).ToLocalTime()");
+    var leftSeconds = 60;
+</script>
+
+
+
+    @Scripts.Render("~/Scripts/Battles/duel.js")
+
+}
+<h2>Duel</h2> 
+<br/>
+<h2 class="@(isAttacker ? "current" : "")">Attacker: @Model.Attacker.UserName <span id="attacker-on-turn" style="display: @(Model.CurrentPlayer.Id == Model.Attacker.Id ? "block" : "none")">(On turn)</span> </h2>
+<div class="life-points">Life points: <span id="attacker-life-points">@Model.AttackerLifePoints</span></div>
+<table border="1" cellspacing="2" cellpadding="2">
+    @for (var row = 0; row < Battle.FieldRows; row++)
+    {
+        <tr>
+            @for (var col = 0; col < Battle.FieldCols; col++)
+            {
+                var currentField = @Model.FieldState.FirstOrDefault(fs => fs.Col == col && fs.Row == row);
+                var isEmpty = currentField.Card == null;
+                var rows = isAttacker ? Battle.AttackerRows : Battle.DefenderRows;
+                <td>
+                    <div class="card-place" data-rowId="@row" data-colId="@col" data-empty="@isEmpty">
+                        @if (rows.Contains(row))
+                        {
+                             if (isEmpty)
+                             {
+                                 <a href="#" class="set-card">Empty</a>
+                             }
+                             else
+                             {
+                                <a href="#" class="select-card" data-id="@currentField.Card.Id">@currentField.Card.Name</a>
+                             }
+                        }
+                        else
+                        {
+                            if (isEmpty)
+                            {
+                                <a href="#" class="foreign-card">Empty</a>
+                            }
+                            else
+                            {
+                                <a href="#" class="foreign-card" data-id="@currentField.Card.Id">@currentField.Card.Name</a>
+                            }
+                        }
+                    </div>
+                </td>
+            }
+        </tr>
+    }
+</table>
+<div id="left-seconds">Turn left in: <span id="seconds"></span></div>
+<div id="deck" data-count="@currentPlayer.Deck.Count">
+    <div class="hand">
+        @foreach (var card in cards)
+        {
+            <div class="card" data-id="@card.Card.Id"><a href="#">@card.Card.Name</a></div>
+        }
+    </div>
+    <a href="#" id="end-turn" style="display: @(currentPlayer.Id == Model.CurrentPlayer.Id ? "block" : "none")">End turn</a>
+</div>
+
+<div class="attack">
+    <a href="#" id="direct-attack">
+        Direct attack
+    </a>
+</div>
+
+<br/>
+
+<h2 class="@(isAttacker ? "" : "current")">Defender: @Model.Defender.UserName <span id="defender-on-turn" style="display: @(Model.CurrentPlayer.Id == Model.Defender.Id ? "block" : "none")">(On turn)</span></h2>
+<div class="life-points">Life points: <span id="defender-life-points">@Model.DefenderLifePoints</span></div>

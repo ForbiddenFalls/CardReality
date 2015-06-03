@@ -1,4 +1,6 @@
-﻿namespace CardReality.Data.Data
+﻿using System.Threading.Tasks;
+
+namespace CardReality.Data.Data
 {
     using CardReality.Data.Models;
     using CardReality.Data.Repositories;
@@ -10,7 +12,11 @@
         IRepository<Letter> Letters { get; }
         IRepository<Market> Offers { get; }
         IRepository<PlayerCard> PlayerCards { get; }
-
+        IRepository<BattlePool> Pool { get; }
+        IRepository<Battle> Battles { get; }
+        IRepository<FieldState> FieldStates { get; }
+        IRepository<BattleHand> BattleHands { get; }
         int SaveChanges();
+        Task<int> SaveChangesAsync();
     }
 }

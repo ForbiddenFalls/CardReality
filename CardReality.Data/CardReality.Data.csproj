@@ -57,7 +57,11 @@
     <Compile Include="Data\IApplicationData.cs" />
     <Compile Include="IApplicationDbContext.cs" />
     <Compile Include="MigrationStrategy.cs" />
+    <Compile Include="Models\Battle.cs" />
+    <Compile Include="Models\BattleHand.cs" />
+    <Compile Include="Models\BattlePool.cs" />
     <Compile Include="Models\Card.cs" />
+    <Compile Include="Models\FieldState.cs" />
     <Compile Include="Models\Letter.cs" />
     <Compile Include="Models\Market.cs" />
     <Compile Include="Models\Player.cs" />

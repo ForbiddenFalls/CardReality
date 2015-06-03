@@ -1,4 +1,6 @@
-﻿namespace CardReality.Data.Data
+﻿using System.Threading.Tasks;
+
+namespace CardReality.Data.Data
 {
     using System;
     using System.Collections.Generic;
@@ -44,9 +46,34 @@
             get { return this.GetRepository<PlayerCard>(); }
         }
 
+        public IRepository<BattlePool> Pool
+        {
+            get { return this.GetRepository<BattlePool>();  }
+        }
+
+        public IRepository<Battle> Battles
+        {
+            get { return this.GetRepository<Battle>(); }
+        }
+
+        public IRepository<FieldState> FieldStates
+        {
+            get { return this.GetRepository<FieldState>(); }
+        }
+
+        public IRepository<BattleHand> BattleHands
+        {
+            get { return this.GetRepository<BattleHand>(); }
+        }
+
         public int SaveChanges()
         {
             return this.context.SaveChanges();
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await this.context.SaveChangesAsync();
         }
 
         private IRepository<T> GetRepository<T>() where T : class
@@ -62,5 +89,6 @@
 
             return (IRepository<T>)this.repositories[type];
         }
+
     }
 }
