@@ -39,6 +39,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
@@ -180,6 +188,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\LetterController.cs" />
+    <Compile Include="Areas\Battles\BattlesAreaRegistration.cs" />
+    <Compile Include="Areas\Battles\Controllers\BattleController.cs" />
+    <Compile Include="Areas\Battles\Controllers\PoolController.cs" />
+    <Compile Include="Areas\Battles\Core\Battle.cs" />
     <Compile Include="Controllers\CardsController.cs" />
     <Compile Include="Controllers\RankingController.cs" />
     <Compile Include="Enums\Language.cs" />
@@ -256,6 +268,11 @@
     <Content Include="Areas\Admin\Views\Letter\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Letter\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Letter\Create.cshtml" />
+    <Content Include="Areas\Battles\Views\Battle\Duel.cshtml" />
+    <Content Include="Areas\Battles\Views\Pool\Index.cshtml" />
+    <Content Include="Areas\Battles\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Battles\Views\web.config" />
+    <Content Include="Areas\Battles\Views\_ViewStart.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -312,6 +329,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Battles\Models\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
