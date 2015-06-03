@@ -36,7 +36,8 @@
             @Html.DisplayFor(modelItem => item.Weight)
         </td>
         <td>
-            @Html.ActionLink("Edit", "LettersEdit", new { id = item.Id }, "Admin")
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, "Letter") |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, "Letter")
         </td>
     </tr>
 }

@@ -178,7 +178,8 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\LetterController.cs" />
     <Compile Include="Controllers\CardsController.cs" />
     <Compile Include="Controllers\RankingController.cs" />
     <Compile Include="Enums\Language.cs" />
@@ -248,6 +249,13 @@
     <Content Include="Content\Images\RoYaL-card.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Letter\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Letter\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Letter\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Letter\Create.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -301,13 +309,9 @@
     <Content Include="Views\Market\Add.cshtml" />
     <Content Include="Views\Cards\Index.cshtml" />
     <Content Include="Views\Ranking\Index.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\Cards.cshtml" />
-    <Content Include="Views\Admin\Users.cshtml" />
-    <Content Include="Views\Admin\Letters\Index.cshtml" />
-    <Content Include="Views\Admin\Letters\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
