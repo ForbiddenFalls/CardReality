@@ -20,7 +20,7 @@
     }
 </style>
 
-@section scripts{
+    @Scripts.Render("~/Scripts/jquery-1.10.2.min.js")
     @Scripts.Render("~/Scripts/jquery.signalR-2.2.0.min.js")
     @Scripts.Render("~/signalr/hubs")
 
@@ -39,7 +39,7 @@
 
     @Scripts.Render("~/Scripts/Battles/duel.js")
 
-}
+
 <h2>Duel</h2> 
 <br/>
 <h2 class="@(isAttacker ? "current" : "")">Attacker: @Model.Attacker.UserName <span id="attacker-on-turn" style="display: @(Model.CurrentPlayer.Id == Model.Attacker.Id ? "block" : "none")">(On turn)</span> </h2>
