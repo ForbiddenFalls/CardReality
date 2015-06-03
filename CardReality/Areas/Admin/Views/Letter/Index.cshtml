@@ -1,0 +1,45 @@
+﻿@model IEnumerable<CardReality.Data.Models.Letter>
+
+@{
+    ViewBag.Title = "Letters";
+}
+
+<h2>Letters</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Char)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Char)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Weight)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, "Letter") |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, "Letter")
+        </td>
+    </tr>
+}
+
+</table>

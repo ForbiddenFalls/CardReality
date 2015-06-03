@@ -1,0 +1,90 @@
+﻿@model PagedList.IPagedList<CardReality.Models.RankingViewModel>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Ranking";
+}
+
+<h2>Ranking</h2>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" placeholder="Search By UserName"/>
+
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Rank           
+        </th>
+        <th>
+            Username
+        </th>
+        <th>
+            @Html.ActionLink("Win Ratio", "Index", new { sortOrder = ViewBag.RatioSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Wins", "Index", new { sortOrder = ViewBag.WinsSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Loss", "Index", new { sortOrder = ViewBag.LossSortParm })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rank)
+            </td>
+            <td title="">
+                @Html.ActionLink(item.UserName, null, null, new { @class = "player-username" })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ratio) %
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Wins)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Loss)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+@section scripts {
+    <script>
+        $(document).ready(function() {
+            $(".player-username").hover(function() {
+                var element = this;
+                $.getJSON("/Ranking/GetPlayerData", { userName: $(this).text() }, function(data) {
+                    var content = '<img src="http://frankfortecig.com/wp-content/uploads/2014/07/placeholder-Copy-2.gif" alt="pic" height="42" width="42"><br/><p>'
+                        + data.Username
+                        + '</p>';
+                    $(element).attr("title", content);
+                    $(element).tooltip({
+                        html: true,
+                        content: function() {
+                            var tooltipContent = $('<div />').html($.parseHTML($(this).attr('title')));
+                            return tooltipContent;
+                        }
+                    });
+                    $(element).attr("title", "");
+                });
+            });
+        });
+    </script>
+}

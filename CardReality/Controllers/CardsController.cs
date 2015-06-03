@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
+
+using Microsoft.AspNet.Identity;
+
 using CardReality.Data.Data;
 using CardReality.Data.Models;
-using Microsoft.AspNet.Identity;
 
 namespace CardReality.Controllers
 {
