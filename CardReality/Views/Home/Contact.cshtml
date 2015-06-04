@@ -1,4 +1,6 @@
-﻿@{
+﻿@using CardReality.Enums
+@using CardReality.Services
+@{
     ViewBag.Title = "Contact";
 }
 
@@ -81,49 +83,49 @@ jQuery(document).ready(function() {
         <div class="row">
             <div class="col-md-8">
                 <!-- Classic Heading -->
-                <h4 class="classic-title"><span>Contact Us</span></h4
+                <h4 class="classic-title"><span>@LocalizationService.Translate(Message.ContactUs)</span></h4>
                 <!-- Start Contact Form -->
                 <form role="form" class="contact-form" id="contact-form" method="post">
                     <div class="form-group">
                         <div class="controls">
-                            <input type="text" placeholder="Name" name="name">
+                            <input type="text" placeholder="@LocalizationService.Translate(Message.Name)" name="name">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="controls">
-                            <input type="email" class="email" placeholder="Email" name="email">
+                            <input type="email" class="email" placeholder="@LocalizationService.Translate(Message.Email)" name="email">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="controls">
-                            <input type="text" class="requiredField" placeholder="Subject" name="subject">
+                            <input type="text" class="requiredField" placeholder="@LocalizationService.Translate(Message.Subject)" name="subject">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="controls">
-                            <textarea rows="7" placeholder="Message" name="message"></textarea>
+                            <textarea rows="7" placeholder="@LocalizationService.Translate(Message.Message)" name="message"></textarea>
                         </div>
                     </div>
-                    <button type="submit" id="submit" class="btn-system btn-large">Send</button><div id="success" style="color:#34495e;"></div>
+                    <button type="submit" id="submit" class="btn-system btn-large">@LocalizationService.Translate(Message.Send)</button><div id="success" style="color:#34495e;"></div>
                 </form>
                 <!-- End Contact Form -->
             </div>
 
             <div class="col-md-4">
                 <!-- Classic Heading -->
-                <h4 class="classic-title"><span>Information</span></h4>
+                <h4 class="classic-title"><span>@LocalizationService.Translate(Message.Information)</span></h4>
 
                 <!-- Some Info -->
-                <p>Card reality is a turn-based card game for passionate players.</p>
+                <p>@LocalizationService.Translate(Message.GameInfo)</p>
 
                 <!-- Divider -->
                 <div class="hr1" style="margin-bottom:10px;"></div>
 
                 <!-- Info - Icons List -->
                 <ul class="icons-list">
-                    <li><i class="fa fa-globe">  </i> <strong>Address:</strong> 1000 Sofia, Bulgaria</li>
-                    <li><i class="fa fa-envelope-o"></i> <strong>Email:</strong> card@CardReality.com</li>
-                    <li><i class="fa fa-mobile"></i> <strong>Phone:</strong> +012 345 678 9AB CDEF</li>
+                    <li><i class="fa fa-globe">  </i> <strong>@LocalizationService.Translate(Message.Address):</strong> 1000 Sofia, Bulgaria</li>
+                    <li><i class="fa fa-envelope-o"></i> <strong>@LocalizationService.Translate(Message.Email):</strong> card@CardReality.com</li>
+                    <li><i class="fa fa-mobile"></i> <strong>@LocalizationService.Translate(Message.Phone):</strong> +012 345 678 9AB CDEF</li>
                 </ul>
             </div>
 
