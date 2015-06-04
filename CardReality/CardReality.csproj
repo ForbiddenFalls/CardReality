@@ -210,6 +210,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\CardsController.cs" />
     <Compile Include="Areas\Admin\Controllers\LettersController.cs" />
     <Compile Include="Areas\Battles\BattlesAreaRegistration.cs" />
     <Compile Include="Areas\Battles\Controllers\BattleController.cs" />
@@ -322,6 +323,10 @@
     <Content Include="Areas\Battles\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Battles\Views\web.config" />
     <Content Include="Areas\Battles\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Cards\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Cards\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Cards\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Cards\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\cardsreality.pubxml" />
     <Content Include="Properties\webjobs-list.json" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />

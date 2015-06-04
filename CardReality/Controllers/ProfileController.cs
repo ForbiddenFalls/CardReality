@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -29,12 +28,6 @@ namespace CardReality.Controllers
         {
             Player player = this.Data.Players.Find(User.Identity.GetUserId());
             return View(player);
-        }
-
-        // GET: Profile/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
         }
 
         // GET: Profile/Edit/5
@@ -96,28 +89,6 @@ namespace CardReality.Controllers
                 Trace.TraceInformation("Created queue message for PlayerId {0}", user.Id);
             }
             return RedirectToAction("Index");
-        }
-
-        // GET: Profile/Delete/5
-        public ActionResult Delete(string id)
-        {
-            return View();
-        }
-
-        // POST: Profile/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         private async Task<CloudBlockBlob> UploadAndSaveBlobAsync(HttpPostedFileBase imageFile)
