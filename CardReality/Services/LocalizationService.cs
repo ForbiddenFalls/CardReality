@@ -72,7 +72,7 @@ namespace CardReality.Services
                         Message.Contact, "Contact"
                     },
                     {
-                        Message.ToBattle, "Right now!"
+                        Message.ToBattle, "Fight now!"
                     },
                     {
                         Message.ExitBattle, "Exit the battle!"
