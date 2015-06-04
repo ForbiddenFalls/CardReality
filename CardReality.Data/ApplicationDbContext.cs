@@ -20,9 +20,15 @@ namespace CardReality.Data
 
         public static readonly List<Card> InitialCards = new List<Card>()
         {
-            new Card() {AttackPoints = 1000, DefensePoints = 200, IsSpecial = false, Name = "DM", SpecialEffect = 0},
-            new Card() {AttackPoints = 800, DefensePoints = 300, IsSpecial = false, Name = "WD", SpecialEffect = 0},
-            new Card() {AttackPoints = 1200, DefensePoints = 1000, IsSpecial = false, Name = "KUF", SpecialEffect = 0}
+            new Card() {AttackPoints = 40, DefensePoints = 20, IsSpecial = false, Name = "DM", SpecialEffect = 0},
+            new Card() {AttackPoints = 30, DefensePoints = 35, IsSpecial = false, Name = "WD", SpecialEffect = 0},
+            new Card() {AttackPoints = 80, DefensePoints = 60, IsSpecial = false, Name = "KUF", SpecialEffect = 0},
+            new Card() {AttackPoints = 120, DefensePoints = 60, IsSpecial = false, Name = "HUM", SpecialEffect = 0},
+            new Card() {AttackPoints = 130, DefensePoints = 60, IsSpecial = false, Name = "LOL", SpecialEffect = 0},
+            new Card() {AttackPoints = 140, DefensePoints = 60, IsSpecial = false, Name = "WOW", SpecialEffect = 0},
+            new Card() {AttackPoints = 150, DefensePoints = 60, IsSpecial = false, Name = "VVV", SpecialEffect = 0},
+            new Card() {AttackPoints = 160, DefensePoints = 60, IsSpecial = false, Name = "BIG", SpecialEffect = 0},
+            new Card() {AttackPoints = 170, DefensePoints = 60, IsSpecial = false, Name = "MAX", SpecialEffect = 0},
         };
 
         private static ApplicationDbContext instance = null;
