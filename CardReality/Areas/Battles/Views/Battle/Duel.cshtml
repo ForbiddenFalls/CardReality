@@ -80,12 +80,13 @@
                         var isEmpty = currentField.Card == null;
                         var rows = isAttacker ? Battle.AttackerRows : Battle.DefenderRows;
                         <td>
-                            <div class="card-place" data-rowid="@row" data-colid="@col" data-empty="@isEmpty">
+                            <div class="card-place" data-rowid="@row" data-colid="@col" data-empty="@isEmpty">                                    
                                 @if (rows.Contains(row))
                                 {
                                     if (isEmpty)
                                     {
                                         <a href="#" class="set-card">Empty</a>
+
                                     }
                                     else
                                     {
@@ -130,3 +131,20 @@
     </div>
     <!-- End Actions -->
 </div>
+
+@*@section scripts {
+    <script>
+        $(document).ready(function() {
+            console.log('tooltip');
+
+            var element = $('#end-turn');
+            $(element).tooltip({
+                html: true,
+                content: function() {
+                    var tooltipContent = $('<div />').html("Fking tooltip");
+                    return tooltipContent;
+                }
+            });
+        });
+    </script>
+}*@

@@ -4,53 +4,38 @@
     ViewBag.Title = "Profile";
 }
 
-<h2>Profile</h2>
+<div class="page-header">
+    <h2>Profile!</h2>
+</div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            Picture
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Money)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Wins)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Loss)
-        </th>
-        <th></th>
-    </tr>
-
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => Model.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => Model.Email)
-        </td>
-        <td>
-            <img src="@Html.Raw(Model.ImageURL)" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => Model.Money)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => Model.Wins)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => Model.Loss)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit")
-        </td>
-    </tr>
-
-</table>
+<div class="container" style="margin-bottom: 10px;">
+    <div class="col-lg-4">
+        <img src="@Html.Raw(Model.ImageURL)" class="img-thumbnail" />
+    </div>
+    
+    <div class="col-lg-8 clearfix">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <strong>@Html.DisplayNameFor(model => model.UserName): </strong>
+                @Html.DisplayFor(modelItem => Model.UserName)
+            </li>
+            <li class="list-group-item">
+                <strong>@Html.DisplayNameFor(model => model.Email): </strong>
+                @Html.DisplayFor(modelItem => Model.Email)
+            </li>
+            <li class="list-group-item">
+                <strong>@Html.DisplayNameFor(model => model.Money): </strong>
+                @Html.DisplayFor(modelItem => Model.Money)
+            </li>
+            <li class="list-group-item">
+                <strong>@Html.DisplayNameFor(model => model.Wins): </strong>
+                @Html.DisplayFor(modelItem => Model.Wins)
+            </li>
+            <li class="list-group-item">
+                <strong>@Html.DisplayNameFor(model => model.Loss): </strong>
+                @Html.DisplayFor(modelItem => Model.Loss)
+            </li>
+        </ul>
+        @Html.ActionLink("Edit", "Edit", null, new { @class = "btn btn-system pull-right" })
+    </div>
+</div>
