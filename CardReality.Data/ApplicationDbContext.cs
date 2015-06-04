@@ -46,6 +46,11 @@ namespace CardReality.Data
             return instance;
         }
 
+        public static ApplicationDbContext CreateNew()
+        {
+            return new ApplicationDbContext();
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<PlayerCard>()

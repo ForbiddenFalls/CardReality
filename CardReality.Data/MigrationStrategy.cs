@@ -27,7 +27,7 @@ namespace CardReality.Data
 
         protected override void Seed(ApplicationDbContext context)
         {
-            CreateAdminUser(context, AdminRole, AdminUserName, AdminEmail, AdminPassword);
+            
 
             List<Letter> letters = new List<Letter>()
             {
@@ -199,6 +199,7 @@ namespace CardReality.Data
             ((DbSet<Letter>)context.Letters).AddRange(letters);
             ((DbSet<Card>) context.Cards).AddRange(InitialCards);
            // ((DbSet<PlayerCard>)context.PlayerCards).AddRange(pcards);
+            CreateAdminUser(context, AdminRole, AdminUserName, AdminEmail, AdminPassword);
         }
 
         private void CreateAdminUser(ApplicationDbContext context, string role, string userName, string email, string password)
@@ -229,6 +230,16 @@ namespace CardReality.Data
             if (!adminRoleResult.Succeeded)
             {
                 throw new Exception(string.Join(",", adminRoleResult.Errors));
+            }
+
+            foreach (var card in InitialCards)
+            {
+                var dbCard = context.Cards.FirstOrDefault(c => c.Name == card.Name);
+                adminUser.Deck.Add(new PlayerCard()
+                {
+                    BoughtFor = 0,
+                    Card = dbCard
+                });
             }
         }
     }
