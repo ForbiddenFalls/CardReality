@@ -19,7 +19,8 @@
             <li>
                 <a href="#">Hello @User.Identity.GetUserName()<b class="caret"></b></a>
                 <ul class="dropdown">
-                    <li role="presentation"> @Html.ActionLink("Profile", "Index", "Profile", routeValues: null, htmlAttributes: new { title = "Manage", role = "menuitem" })</li>
+                    <li role="presentation"> @Html.ActionLink("Profile", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", role = "menuitem" })</li>
+                    <li role="presentation"> @Html.ActionLink("Market", "Index", "Market", routeValues: null, htmlAttributes: new { title = "Market", role = "menuitem" })</li>
                     <li role="presentation"><a role="menuitem" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                 </ul>
             </li>

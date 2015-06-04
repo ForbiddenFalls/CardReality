@@ -24,86 +24,109 @@
     @Scripts.Render("~/Scripts/jquery-1.10.2.min.js")
     @Scripts.Render("~/Scripts/jquery.signalR-2.2.0.min.js")
     @Scripts.Render("~/signalr/hubs")
-<script>
-    var battle = $.connection.battleHub;
-    var attackerId = "@Model.Attacker.Id";
-    var defenderId = "@Model.Defender.Id";
-    var battleId = Number("@Model.Id");
-    var selectedCard = null;
+    <script>
+        var battle = $.connection.battleHub;
+        var attackerId = "@Model.Attacker.Id";
+        var defenderId = "@Model.Defender.Id";
+        var battleId = Number("@Model.Id");
+        var selectedCard = null;
 
-    var turnDate = new Date("@Model.TurnStartedOn.AddSeconds(BattleController.TurnDelay).ToLocalTime()");
-    var leftSeconds = 60;
-</script>
+        var turnDate = new Date("@Model.TurnStartedOn.AddSeconds(BattleController.TurnDelay).ToLocalTime()");
+        var leftSeconds = 60;
+    </script>
 
 
 
-@Scripts.Render("~/Scripts/Battles/duel.js")
+    @Scripts.Render("~/Scripts/Battles/duel.js")
 }
 
-
-
-
-<h2>Duel</h2> 
-<br/>
-<h2 class="@(isAttacker ? "current" : "")">Attacker: @Model.Attacker.UserName <span id="attacker-on-turn" style="display: @(Model.CurrentPlayer.Id == Model.Attacker.Id ? "block" : "none")">(On turn)</span> </h2>
-<div class="life-points">Life points: <span id="attacker-life-points">@Model.AttackerLifePoints</span></div>
-<table border="1" cellspacing="2" cellpadding="2">
-    @for (var row = 0; row < Battle.FieldRows; row++)
-    {
-        <tr>
-            @for (var col = 0; col < Battle.FieldCols; col++)
-            {
-                var currentField = @Model.FieldState.FirstOrDefault(fs => fs.Col == col && fs.Row == row);
-                var isEmpty = currentField.Card == null;
-                var rows = isAttacker ? Battle.AttackerRows : Battle.DefenderRows;
-                <td>
-                    <div class="card-place" data-rowId="@row" data-colId="@col" data-empty="@isEmpty">
-                        @if (rows.Contains(row))
-                        {
-                             if (isEmpty)
-                             {
-                                 <a href="#" class="set-card">Empty</a>
-                             }
-                             else
-                             {
-                                <a href="#" class="select-card" data-id="@currentField.Card.Id">@currentField.Card.Name</a>
-                             }
-                        }
-                        else
-                        {
-                            if (isEmpty)
-                            {
-                                <a href="#" class="foreign-card">Empty</a>
-                            }
-                            else
-                            {
-                                <a href="#" class="foreign-card" data-id="@currentField.Card.Id">@currentField.Card.Name</a>
-                            }
-                        }
-                    </div>
-                </td>
-            }
-        </tr>
-    }
-</table>
-<div id="left-seconds">Turn left in: <span id="seconds"></span></div>
-<div id="deck" data-count="@currentPlayer.Deck.Count">
-    <div class="hand">
-        @foreach (var card in cards)
-        {
-            <div class="card" data-id="@card.Card.Id"><a href="#">@card.Card.Name</a></div>
-        }
+<div class="page-header">
+    <h2>Duel! <small>Let the battle begin!</small></h2>
+</div>
+<div class="container">
+    <!-- Players -->
+    <div class="col-lg-3">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Life points: <span id="attacker-life-points">@Model.AttackerLifePoints</span>
+                </h3>
+            </div>
+            <div class="panel-body @(isAttacker ? "current" : "")">
+                @Model.Attacker.UserName <span id="attacker-on-turn" style="display: @(Model.CurrentPlayer.Id == Model.Attacker.Id ? "inline-block" : "none")">(On turn)</span>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Life points: <span id="defender-life-points">@Model.DefenderLifePoints</span>
+                </h3>
+            </div>
+            <div class="panel-body @(!isAttacker ? "current" : "")">
+                @Model.Defender.UserName <span id="defender-on-turn" style="display: @(Model.CurrentPlayer.Id == Model.Defender.Id ? "inline-block" : "none")">(On turn)</span>
+            </div>
+        </div>
     </div>
-    <a href="#" id="end-turn" style="display: @(currentPlayer.Id == Model.CurrentPlayer.Id ? "block" : "none")">End turn</a>
+    <!-- End Players-->
+    <!-- Field -->
+    <div class="col-lg-7">
+        <table class="table table-hover table-responsive">
+            @for (var row = 0; row < Battle.FieldRows; row++)
+            {
+                <tr>
+                    @for (var col = 0; col < Battle.FieldCols; col++)
+                    {
+                        var currentField = @Model.FieldState.FirstOrDefault(fs => fs.Col == col && fs.Row == row);
+                        var isEmpty = currentField.Card == null;
+                        var rows = isAttacker ? Battle.AttackerRows : Battle.DefenderRows;
+                        <td>
+                            <div class="card-place" data-rowid="@row" data-colid="@col" data-empty="@isEmpty">
+                                @if (rows.Contains(row))
+                                {
+                                    if (isEmpty)
+                                    {
+                                        <a href="#" class="set-card">Empty</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="#" class="select-card" data-id="@currentField.Card.Id">@currentField.Card.Name</a>
+                                    }
+                                }
+                                else
+                                {
+                                    if (isEmpty)
+                                    {
+                                        <a href="#" class="foreign-card">Empty</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="#" class="foreign-card" data-id="@currentField.Card.Id">@currentField.Card.Name</a>
+                                    }
+                                }
+                            </div>
+                        </td>
+                    }
+                </tr>
+            }
+        </table>        
+    </div>
+    <!-- End Field-->
+    <!-- Actions -->
+    <div class="col-lg-2">
+        <div id="left-seconds" class="text-center">Turn time left: <span id="seconds"></span></div>
+        
+
+        <div id="deck" data-count="@currentPlayer.Deck.Count">
+            <div class="hand">
+                @foreach (var card in cards)
+                {
+                    <div class="card" data-id="@card.Card.Id"><a href="#">@card.Card.Name</a></div>
+                }
+            </div>
+        </div>
+
+        <a href="#" id="direct-attack" class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12" @(currentPlayer.Id == Model.CurrentPlayer.Id ? "" : "disabled")>Direct attack</a>
+        <a href="#" id="end-turn" class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12" @(currentPlayer.Id == Model.CurrentPlayer.Id ? "" : "disabled")>End turn</a>
+    </div>
+    <!-- End Actions -->
 </div>
-
-<div class="attack">
-    <a href="#" id="direct-attack">
-        Direct attack
-    </a>
-</div>
-
-<br/>
-
-<h2 class="@(isAttacker ? "" : "current")">Defender: @Model.Defender.UserName <span id="defender-on-turn" style="display: @(Model.CurrentPlayer.Id == Model.Defender.Id ? "block" : "none")">(On turn)</span></h2>
-<div class="life-points">Life points: <span id="defender-life-points">@Model.DefenderLifePoints</span></div>

@@ -6,15 +6,17 @@
     ViewBag.Title = "Ranking";
 }
 
-<h2>Ranking</h2>
+<div class="page-header">
+    <h2>Ranking</h2>
+</div>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("", "Ranking", FormMethod.Post, new { @class = "pull-right form-inline", @style = "margin-bottom: 10px" }))
 {
-    <p>
-        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Search" placeholder="Search By UserName"/>
-
-    </p>
+    <div class="form-group">
+        <label class ="sr-only" for="searchString">Find by name</label>
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Search username"})
+    </div>
+    <button type="submit" class="btn btn-default">Search</button>
 }
 
 <table class="table">

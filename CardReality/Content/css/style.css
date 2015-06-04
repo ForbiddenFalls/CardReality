@@ -24,6 +24,7 @@
 /*   11 - Sidebar Styles           */
 /*   12 - Footer Styles 		   */
 /*   13 - Plugins Styles 	  	   */
+/*   14 - User defined Styles      */
 
 
 
@@ -5658,4 +5659,17 @@ ul.footer-nav li a:hover {
 
 .navbar-collapse {
 	max-height: 340px;
+}
+
+
+/*------------------------------------------*/
+/*	     14 - User Defined Styles
+/*------------------------------------------*/
+
+#left-seconds {
+    font-size: 22px;
+}
+
+.panel-title {
+    padding-left: 10px;
 }
