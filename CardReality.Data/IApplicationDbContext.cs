@@ -15,7 +15,8 @@ namespace CardReality.Data
         IDbSet<BattlePool> BattlePool { get; set; }
         IDbSet<Battle> Battles { get; set; }
         IDbSet<FieldState> FieldState { get; set; }
-        IDbSet<BattleHand> BattleHands { get; set; } 
+        IDbSet<BattleHand> BattleHands { get; set; }
+        IDbSet<Contact> Contacts { get; set; } 
 
         int SaveChanges();
         Task<int> SaveChangesAsync();

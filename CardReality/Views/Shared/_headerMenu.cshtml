@@ -1,4 +1,6 @@
-﻿<header class="clearfix">
+﻿@using CardReality.Enums
+@using CardReality.Services
+<header class="clearfix">
     <div class="navbar navbar-default navbar-top">
         <div class="container">
             <div class="navbar-header">
@@ -7,14 +9,14 @@
                     <i class="fa fa-bars"></i>
                 </button>
                 <!-- End Toggle Nav Link For Mobiles -->
-                @Html.ActionLink("Card Reality", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Card Reality", "Index", "Home", new { Area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <!-- Start Navigation List -->
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Ranking", "Index", "Ranking")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li><a href="/Ranking">@LocalizationService.Translate(Message.Ranking)</a></li>
+                    <li><a href="/Home/About">@LocalizationService.Translate(Message.About)</a></li>
+                    <li><a href="/Home/Contact">@LocalizationService.Translate(Message.Contact)</a></li>
                 </ul>
                 @Html.Partial("_LoginPartial")
                 <!-- End Navigation List -->

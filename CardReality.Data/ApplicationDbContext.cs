@@ -41,7 +41,8 @@ namespace CardReality.Data
         public IDbSet<BattlePool> BattlePool { get; set; }
         public IDbSet<Battle> Battles { get; set; }
         public IDbSet<FieldState> FieldState { get; set; }
-        public IDbSet<BattleHand> BattleHands { get; set; } 
+        public IDbSet<BattleHand> BattleHands { get; set; }
+        public IDbSet<Contact> Contacts { get; set; } 
 
         private static object syncRoot = new Object();
 

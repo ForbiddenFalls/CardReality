@@ -28,12 +28,12 @@ namespace CardReality.Areas.Battles.Controllers
         public ActionResult Duel(int id)
         {
             var player = this.Data.Players.Find(User.Identity.GetUserId());
-            if (
-                !this.Data.Battles.All()
-                    .Any(b => b.Id == id && (b.Attacker.Id == player.Id || b.Defender.Id == player.Id) && b.IsActive))
-            {
-                throw new HubException("You do not belong to that duel");
-            }
+            //if (
+            //    !this.Data.Battles.All()
+            //        .Any(b => b.Id == id && (b.Attacker.Id == player.Id || b.Defender.Id == player.Id) && b.IsActive))
+            //{
+            //    throw new HubException("You do not belong to that duel");
+            //}
 
             var battle = this.Data.Battles.Find(id);
             var currentDate = DateTime.Now;

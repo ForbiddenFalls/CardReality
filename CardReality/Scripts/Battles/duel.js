@@ -64,7 +64,14 @@
     battle.client.changeTurn = function (playerOnTurnId) {
         $("#attacker-on-turn").toggle();
         $("#defender-on-turn").toggle();
-        $("#end-turn").toggle();
+        var endTurn = $('#end-turn').attr('disabled');
+        if (!endTurn) {
+            $('#end-turn').attr('disabled', true);
+            $('#direct-attack').attr('disabled', true);
+        } else {
+            $('#end-turn').removeAttr('disabled');
+            $('#direct-attack').removeAttr('disabled');
+        }
         turnDate = new Date();
         turnDate.setSeconds(turnDate.getSeconds() + 60);
         updateTime(turnDate);

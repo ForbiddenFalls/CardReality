@@ -1,4 +1,6 @@
-﻿@{
+﻿@using CardReality.Enums
+@using CardReality.Services
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -15,8 +17,8 @@
                     <i class="fa fa-bolt icon-medium-effect icon-effect-2 gray-icon"></i>
                 </div>
                 <div class="service-content">
-                    <h4>Turn-based card game</h4>
-                    <p>We have developed an awesome turn-based card game with ASP.NET and SignalR serving the backend and the gameplay.</p>
+                    <h4>@LocalizationService.Translate(Message.GameType)</h4>
+                    <p>@LocalizationService.Translate(Message.GameTechs)</p>
                 </div>
             </div>
             <!-- End Service Icon 1 -->
@@ -26,8 +28,8 @@
                     <i class="fa fa-eye icon-medium-effect icon-effect-2"></i>
                 </div>
                 <div class="service-content">
-                    <h4>Responsive done</h4>
-                    <p>Although it is a more of a Back-End project we did some nice stuffs in the Front-End. Our site is fully responsive - no matter if you are viewing it on you phone, laptop, pc or even your tv at home.</p>
+                    <h4>@LocalizationService.Translate(Message.DesignResponsive)</h4>
+                    <p>@LocalizationService.Translate(Message.DesignInfo)</p>
                 </div>
             </div>
             <!-- End Service Icon 2 -->
@@ -37,8 +39,8 @@
                     <i class="fa fa-code icon-medium-effect icon-effect-2 gray-icon"></i>
                 </div>
                 <div class="service-content">
-                    <h4>Clean Code</h4>
-                    <p>We have followed some of the best practices used nowadays. DRY insted of WET for example (Don't Repeat Yourself instead of We Enjoy Typing)</p>
+                    <h4>@LocalizationService.Translate(Message.CleanCode)</h4>
+                    <p>@LocalizationService.Translate(Message.CleanCodeInfo)</p>
                 </div>
             </div>
             <!-- End Service Icon 3 -->
@@ -48,8 +50,8 @@
                     <i class="fa fa-magic icon-medium-effect icon-effect-2"></i>
                 </div>
                 <div class="service-content">
-                    <h4>High Quality Product</h4>
-                    <p>In the end of all this we came up with an awesome project build from the ForbiddenCity Team</p>
+                    <h4>@LocalizationService.Translate(Message.HighQuality)</h4>
+                    <p>@LocalizationService.Translate(Message.HighQualityInfo)</p>
                 </div>
             </div>
             <!-- End Service Icon 4 -->

@@ -4,24 +4,26 @@
     ViewBag.Title = "Add";
 }
 
-<h2>Add</h2>
+<div class="page-header">
+    <h2 class="">Add <small>new item on the market</small></h2>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
-<form action="/market/addoffer" method="post">
-    <select name="card">
-        <option value="0">-- Select a card --</option>
-        @foreach (var item in Model)
-        {
-            <option value="@Html.DisplayFor(modelItem => item.Card.Id)">
-                @Html.DisplayFor(modelItem => item.Card.Name)
-            </option>
-        }
-    </select>
-
-    <input type="text" name="price" value="0" />
-
-    <input type="submit" name="submit" value="sell" />
-</form>
+<div class="container">
+    <form action="/market/addoffer" method="post" class="form-inline" style="margin-bottom: 10px;">
+        <div class="form-group">
+            <select name="card" class="form-control">
+                <option value="0">-- Select a card --</option>
+                @foreach (var item in Model)
+                {
+                    <option value="@Html.DisplayFor(modelItem => item.Card.Id)">
+                        @Html.DisplayFor(modelItem => item.Card.Name)
+                    </option>
+                }
+            </select>    
+        </div>
+        <div class="form-group">
+            <input type="text" name="price" value="0" class="form-control" />    
+        </div>
+        <input type="submit" name="submit" value="Sell"  class="btn btn-primary"/>
+    </form>
+</div>

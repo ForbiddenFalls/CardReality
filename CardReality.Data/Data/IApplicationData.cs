@@ -16,6 +16,7 @@ namespace CardReality.Data.Data
         IRepository<Battle> Battles { get; }
         IRepository<FieldState> FieldStates { get; }
         IRepository<BattleHand> BattleHands { get; }
+        IRepository<Contact> Contacts { get; } 
         int SaveChanges();
         Task<int> SaveChangesAsync();
     }
