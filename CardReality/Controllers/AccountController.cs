@@ -160,7 +160,7 @@ namespace CardReality.Controllers
             if (ModelState.IsValid)
             {
                 var user = new Player { UserName = model.UserName, Email = model.Email };
-                foreach (var card in MigrationStrategy.InitialCards)
+                foreach (var card in ApplicationDbContext.InitialCards)
                 {
                     user.Deck.Add(new PlayerCard()
                     {

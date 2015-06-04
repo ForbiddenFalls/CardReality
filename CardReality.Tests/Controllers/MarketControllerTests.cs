@@ -18,29 +18,41 @@ using CardReality.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CardReality.Tests.Controllers
 {
     [TestClass]
     public class MarketControllerTests
     {
+        private string username;
+
+        public MarketControllerTests()
+        {
+            string username = "test_user_" + DateTime.Now.Ticks;
+            using (var context = ApplicationDbContext.CreateNew())
+            {
+                context.CreateUser("user", username, username + "@abv.bg", "#Lo6omie");
+                context.SaveChanges();
+                this.username = username;
+            }
+        }
+
         [TestMethod]
         public void TestIndex_ShouldReturnDatabaseProjection()
         {
             using (var context = ApplicationDbContext.CreateNew())
             {
-                Thread.Sleep(60);
                 var db = new ApplicationData(context);
-
-                var identity = new GenericIdentity("admin");
                 var controller = new MarketController(db);
 
                 var controllerContext = new Mock<ControllerContext>();
-                var principal = new Mock<IPrincipal>();
-                principal.Setup(p => p.IsInRole("Administrator")).Returns(true);
-                principal.SetupGet(x => x.Identity.Name).Returns("admin");
-
-                controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
                 controller.ControllerContext = controllerContext.Object;
 
                 var result = controller.Index();
@@ -57,11 +69,10 @@ namespace CardReality.Tests.Controllers
         {
             using (var context = ApplicationDbContext.CreateNew())
             {
-                Thread.Sleep(60);
                 var db = new ApplicationData(context);
-                var user = db.Players.All().FirstOrDefault(p => p.UserName == "admin");
+                var user = db.Players.All().FirstOrDefault(p => p.UserName == this.username);
 
-                var claim = new Claim("admin", user.Id);
+                var claim = new Claim(this.username, user.Id);
                 var mockIdentity =
                     Mock.Of<ClaimsIdentity>(ci => ci.FindFirst(It.IsAny<string>()) == claim);
                 var principal = new ClaimsPrincipal(mockIdentity);
@@ -89,5 +100,7 @@ namespace CardReality.Tests.Controllers
                 var result = controller.AddOffer();
                 Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));            }
         }
+
+
     }
 }
