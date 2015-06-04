@@ -20,10 +20,10 @@
     }
 </style>
 
+@section scripts {
     @Scripts.Render("~/Scripts/jquery-1.10.2.min.js")
     @Scripts.Render("~/Scripts/jquery.signalR-2.2.0.min.js")
     @Scripts.Render("~/signalr/hubs")
-
 <script>
     var battle = $.connection.battleHub;
     var attackerId = "@Model.Attacker.Id";
@@ -37,7 +37,10 @@
 
 
 
-    @Scripts.Render("~/Scripts/Battles/duel.js")
+@Scripts.Render("~/Scripts/Battles/duel.js")
+}
+
+
 
 
 <h2>Duel</h2> 

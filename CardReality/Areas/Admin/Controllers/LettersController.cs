@@ -6,20 +6,25 @@ using CardReality.Data.Models;
 
 namespace CardReality.Areas.Admin.Controllers
 {
-    public class LetterController : BaseController
+    [Authorize(Roles = "Administrator")]
+    public class LettersController : BaseController
     {
-        // GET: Admin/Letter
-        public LetterController(IApplicationData data) : base(data)
+        // GET: Admin/Letters
+        public LettersController(IApplicationData data)
+            : base(data)
         {
         }
 
+        [HttpGet]
+        // GET: Admin/Letter
         public ActionResult Index()
         {
             var letters = this.Data.Letters.All();
             return View(letters);
         }
 
-        // GET: Admin/Letter/Create
+        // GET: Admin/Letters/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -27,6 +32,7 @@ namespace CardReality.Areas.Admin.Controllers
 
         // POST: Admin/Letter/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(FormCollection collection)
         {
             try
@@ -49,6 +55,7 @@ namespace CardReality.Areas.Admin.Controllers
         }
 
         // GET: Admin/Letter/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
         {
             var letter = this.Data.Letters.All().FirstOrDefault(l => l.Id == id);
@@ -72,7 +79,7 @@ namespace CardReality.Areas.Admin.Controllers
 
             if (!string.IsNullOrEmpty(collection[2]))
             {
-                letter.Weight = int.Parse(collection[2]);                
+                letter.Weight = int.Parse(collection[2]);
             }
 
             this.Data.Letters.Update(letter);
@@ -84,6 +91,7 @@ namespace CardReality.Areas.Admin.Controllers
         }
 
         // GET: Admin/Letter/Delete/5
+        [HttpGet]
         public ActionResult Delete(int id)
         {
             var letter = this.Data.Letters.All().FirstOrDefault(l => l.Id == id);
@@ -93,6 +101,7 @@ namespace CardReality.Areas.Admin.Controllers
 
         // POST: Admin/Letter/Delete/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try

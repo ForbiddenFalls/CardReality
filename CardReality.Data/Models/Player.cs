@@ -2,6 +2,8 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.SqlServer;
 using System.Linq;
@@ -13,6 +15,14 @@ namespace CardReality.Data.Models
 {
     public class Player : IdentityUser
     {
+        [StringLength(1000)]
+        [DisplayName("Full-size Image")]
+        public string ImageURL { get; set; }
+
+        [StringLength(1000)]
+        [DisplayName("Thumbnail")]
+        public string ThumbnailURL { get; set; }
+
         private static Random random = new Random();
 
         public const int MaxHandCards = 5;
