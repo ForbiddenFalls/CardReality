@@ -7,14 +7,14 @@
                     <i class="fa fa-bars"></i>
                 </button>
                 <!-- End Toggle Nav Link For Mobiles -->
-                @Html.ActionLink("Card Reality", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Card Reality", "Index", "Home", new { Area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <!-- Start Navigation List -->
                 <ul class="nav navbar-nav">
                     <li><a href="/Ranking">Ranking</a></li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li><a href="/Home/About">About</a></li>
+                    <li><a href="/Home/Contact">Contact</a></li>
                 </ul>
                 @Html.Partial("_LoginPartial")
                 <!-- End Navigation List -->
