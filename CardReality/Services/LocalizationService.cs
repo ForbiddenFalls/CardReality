@@ -128,6 +128,12 @@ namespace CardReality.Services
                     {
                         Message.Language, "Language"
                     },
+                    {
+                        Message.Cards, "Cards"
+                    },                    
+                    {
+                        Message.Users, "Users"
+                    }
                 }
             },
             {
@@ -247,6 +253,12 @@ namespace CardReality.Services
                     {
                         Message.Language, "Език"
                     },
+                    {
+                        Message.Cards, "Карти"
+                    },
+                    {
+                        Message.Users, "Потребители"
+                    }
                 }
             }
         };
