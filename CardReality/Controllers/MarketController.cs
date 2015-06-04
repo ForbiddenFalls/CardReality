@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 
 namespace CardReality.Controllers
 {
+    [Authorize]
     public class MarketController : BaseController
     {
         
@@ -62,7 +63,7 @@ namespace CardReality.Controllers
 
             if (this.Data.SaveChanges() > 0)
             {
-                return RedirectToAction("Add");
+                return RedirectToAction("Index");
             }
 
             throw new Exception(LocalizationService.Translate(Message.CardNotSold));

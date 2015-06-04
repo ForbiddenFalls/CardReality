@@ -15,9 +15,12 @@
                 <div class="slider-content">
                     <div class="col-md-12 text-center">
                         <h2 class="animated4">
-                            <span style="color:#fff;">Welcome to <strong>Card Reality</strong></span>
+                            <span style="color: #fff;">Welcome to <strong>Card Reality</strong></span>
                         </h2>
-                        <p class="animated6">@Html.ActionLink("Play Now", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "slider btn btn-system btn-large" })</p>
+                        @if (!Request.IsAuthenticated)
+                        {
+                            <p class="animated6">@Html.ActionLink("Play Now", "Register", "Account", routeValues: null, htmlAttributes: new {@class = "slider btn btn-system btn-large"})</p>
+                        }
                     </div>
                 </div>
             </div><!--/ Carousel item end -->
@@ -31,7 +34,10 @@
                         <h3 class="animated5">
                             <span style="color:#fff;">And win the match</span>
                         </h3>
-                        <p class="animated6">@Html.ActionLink("Play Now", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "slider btn btn-system btn-large" })</p>
+                        @if (!Request.IsAuthenticated)
+                        {
+                            <p class="animated6">@Html.ActionLink("Play Now", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "slider btn btn-system btn-large" })</p>
+                        }
                     </div>
                 </div>
             </div><!--/ Carousel item end -->
@@ -45,7 +51,10 @@
                         <h3 class="animated8 white">
                             <span>Card by card</span>
                         </h3>
-                        <p class="animated6">@Html.ActionLink("Play Now", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "slider btn btn-system btn-large" })</p>
+                        @if (!Request.IsAuthenticated)
+                        {
+                            <p class="animated6">@Html.ActionLink("Play Now", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "slider btn btn-system btn-large" })</p>
+                        }
                     </div>
                 </div>
             </div><!--/ Carousel item end -->

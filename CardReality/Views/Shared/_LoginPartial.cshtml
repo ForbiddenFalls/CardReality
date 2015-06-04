@@ -28,7 +28,7 @@
             <li>
                 <a href="#">@LocalizationService.Translate(Message.Hello) @User.Identity.GetUserName()<b class="caret"></b></a>
                 <ul class="dropdown">
-                    <li role="presentation"> @Html.ActionLink(LocalizationService.Translate(Message.Profile), "Index", "Manage", new { Area = "" }, htmlAttributes: new { title = LocalizationService.Translate(Message.Profile), role = "menuitem" })</li>
+                    <li role="presentation"> @Html.ActionLink(LocalizationService.Translate(Message.Profile), "Index", "Profile", new { Area = "" }, htmlAttributes: new { title = LocalizationService.Translate(Message.Profile), role = "menuitem" })</li>
                     <li role="presentation"> @Html.ActionLink(LocalizationService.Translate(Message.Market), "Index", "Market", new { Area = "" }, htmlAttributes: new { title = LocalizationService.Translate(Message.Market), role = "menuitem" })</li>
                     
                     @if (User.IsInRole("Administrator"))
