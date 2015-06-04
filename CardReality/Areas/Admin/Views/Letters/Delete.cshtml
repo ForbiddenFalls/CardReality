@@ -4,13 +4,23 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<div class="page-header clearfix">
+    <h2 class="pull-left">Delete! <small>Are you sure you want to delete this?</small></h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Letter</h4>
-    <hr />
-    <dl class="dl-horizontal">
+    <div class="pull-right">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" />
+            </div>
+        }
+    </div>
+</div>
+
+<div class="clearfix">
+    <dl class="dl-horizontal pull-left col-lg-4">
         <dt>
             @Html.DisplayNameFor(model => model.Char)
         </dt>
@@ -26,15 +36,9 @@
         <dd>
             @Html.DisplayFor(model => model.Weight)
         </dd>
-
     </dl>
+</div>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+<div style="margin-bottom: 10px;">
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
 </div>

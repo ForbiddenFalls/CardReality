@@ -4,11 +4,13 @@
     ViewBag.Title = "Letters";
 }
 
-<h2>Letters</h2>
+<div class="page-header clearfix">
+    <h2 class="pull-left">Letter</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+    <div class="pull-right">
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })
+    </div>
+</div>
 
 <table class="table">
     <tr>
@@ -21,7 +23,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Weight)
         </th>
-        <th></th>
+        <th>
+            Actions
+        </th>
     </tr>
 
 @foreach (var item in Model) {
