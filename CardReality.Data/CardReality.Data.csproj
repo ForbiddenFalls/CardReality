@@ -68,6 +68,7 @@
     <Compile Include="Models\BattleHand.cs" />
     <Compile Include="Models\BattlePool.cs" />
     <Compile Include="Models\Card.cs" />
+    <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\FieldState.cs" />
     <Compile Include="Models\Letter.cs" />
     <Compile Include="Models\Market.cs" />

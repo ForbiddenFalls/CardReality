@@ -66,6 +66,11 @@ namespace CardReality.Data.Data
             get { return this.GetRepository<BattleHand>(); }
         }
 
+        public IRepository<Contact> Contacts
+        {
+            get { return this.GetRepository<Contact>(); }
+        }
+
         public int SaveChanges()
         {
             return this.context.SaveChanges();
