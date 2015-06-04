@@ -9,13 +9,12 @@ namespace CardReality
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                "~/Scripts/jquery-{version}.js"));
+                "~/Scripts/jquery-1.10.2.js",
+                "~/Scripts/jquery-ui-1.11.4.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                 "~/Scripts/jquery.validate*"));
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                 "~/Scripts/modernizr-*"));
 
@@ -23,13 +22,29 @@ namespace CardReality
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/respond.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                "~/Scripts/jquery-ui-{version}.js"));
+            bundles.Add(new ScriptBundle("~/theme-scripts").Include(
+                "~/Content/js/jquery-migrate-1.2.1.min.js",
+                "~/Content/js/jquery.isotope.min.js",
+                "~/Content/js/jquery.appear.js",
+                "~/Content/js/jquery.nicescroll.min.js",
+                "~/Content/js/jquery.parallax.js",
+                "~/Content/js/jquery.textillate.js",
+                "~/Content/js/owl.carousel.min.js",
+                "~/Content/js/count-to.js",
+                "~/Content/js/nivo-lightbox.min.js",
+                "~/Content/js/script.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/jquery-ui.min.css",
-                "~/Content/site.css",
+                "~/Content/css/font-awesome.min.css",
+                "~/Content/css/style.css",
+                "~/Content/css/responsive.css",
+                "~/Content/css/animate.css",
+                "~/Content/css/green.css"
+                ));
+
+            bundles.Add(new StyleBundle("~/bundles/jquery-ui").Include(
                 "~/Content/themes/base/jquery.ui.core.css",
                 "~/Content/themes/base/jquery.ui.resizable.css",
                 "~/Content/themes/base/jquery.ui.selectable.css",

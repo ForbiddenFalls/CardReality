@@ -2,30 +2,60 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="col-lg-12 col-md-12 col-sm-12 hidden-xs">
-    <img src="@Url.Content("~/Content/Images/cover-photo.png")" alt="Card-Reality-Cover-Photo" />
-</div>
+@Html.Partial("_carouselPartial")
 
-<div class="col-lg-12 col-md-12 col-sm-12 home-container">
-    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 homepage-intro">
-        <img src="@Url.Content("~/Content/Images/RoYaL-card.png")" alt="RoYaL-card-photo" />
-        <p>
-            You, yes exactly you! Go ahead now and register to compete against other real players!
-        </p>
-        <a class="btn btn-primary" href="@Url.Action("Register", "Account")">Register</a>
+<!-- Start Content -->
+<div id="content">
+    <div class="container">
+        <!-- Start Services Icons -->
+        <div class="row">
+            <!-- Start Service Icon 1 -->
+            <div class="col-md-3 col-sm-6 service-box service-center">
+                <div class="service-icon">
+                    <i class="fa fa-bolt icon-medium-effect icon-effect-2 gray-icon"></i>
+                </div>
+                <div class="service-content">
+                    <h4>Turn-based card game</h4>
+                    <p>We have developed an awesome turn-based card game with ASP.NET and SignalR serving the backend and the gameplay.</p>
+                </div>
+            </div>
+            <!-- End Service Icon 1 -->
+            <!-- Start Service Icon 2 -->
+            <div class="col-md-3 col-sm-6 service-box service-center">
+                <div class="service-icon">
+                    <i class="fa fa-eye icon-medium-effect icon-effect-2"></i>
+                </div>
+                <div class="service-content">
+                    <h4>Responsive done</h4>
+                    <p>Although it is a more of a Back-End project we did some nice stuffs in the Front-End. Our site is fully responsive - no matter if you are viewing it on you phone, laptop, pc or even your tv at home.</p>
+                </div>
+            </div>
+            <!-- End Service Icon 2 -->
+            <!-- Start Service Icon 3 -->
+            <div class="col-md-3 col-sm-6 service-box service-center">
+                <div class="service-icon">
+                    <i class="fa fa-code icon-medium-effect icon-effect-2 gray-icon"></i>
+                </div>
+                <div class="service-content">
+                    <h4>Clean Code</h4>
+                    <p>We have followed some of the best practices used nowadays. DRY insted of WET for example (Don't Repeat Yourself instead of We Enjoy Typing)</p>
+                </div>
+            </div>
+            <!-- End Service Icon 3 -->
+            <!-- Start Service Icon 4 -->
+            <div class="col-md-3 col-sm-6 service-box service-center">
+                <div class="service-icon">
+                    <i class="fa fa-magic icon-medium-effect icon-effect-2"></i>
+                </div>
+                <div class="service-content">
+                    <h4>High Quality Product</h4>
+                    <p>In the end of all this we came up with an awesome project build from the ForbiddenCity Team</p>
+                </div>
+            </div>
+            <!-- End Service Icon 4 -->
+        </div>
+        <!-- End Services Icons -->
     </div>
-    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 homepage-intro">
-        <img src="@Url.Content("~/Content/Images/bankin-card.png")" alt="bankin-card-photo" />
-        <p>
-            Don't be afraid of the other players. Go ahead and check the rankings to see what's happening!
-        </p>
-        <a class="btn btn-primary" href="@Url.Action("index", "Ranking")">Rankings</a>
-    </div>
-    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 homepage-intro">
-        <img src="@Url.Content("~/Content/Images/julieta-card.png")" alt="julieta-card-photo" />
-        <p>
-            But we are not scary after all. Go and check who created this game in the about us page. Feel free to contact us with you amazing ideas on how to improove this game.
-        </p>
-        <a class="btn btn-primary" href="@Url.Action("About")">About Us</a>
-    </div>
+    
+    @Html.Partial("_teamPartial")
 </div>
