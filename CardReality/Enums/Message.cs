@@ -39,6 +39,8 @@
         CleanCodeInfo,
         HighQuality,
         HighQualityInfo,
-        Language
+        Language,
+        Cards,
+        Users
     }
 }

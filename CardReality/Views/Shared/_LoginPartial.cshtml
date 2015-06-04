@@ -35,6 +35,8 @@
                     {
                         <li role="presentation" class="divider"></li>
                         <li role="presentation">@Html.ActionLink(LocalizationService.Translate(Message.Letters), "Index", "Letters", new { Area = "Admin" }, htmlAttributes: new { title = LocalizationService.Translate(Message.Letters), role = "menuitem" })</li>
+                        <li role="presentation">@Html.ActionLink(LocalizationService.Translate(Message.Cards), "Index", "Cards", new { Area = "Admin" }, htmlAttributes: new { title = LocalizationService.Translate(Message.Cards), role = "menuitem" })</li>
+                        <li role="presentation">@Html.ActionLink(LocalizationService.Translate(Message.Users), "Index", "Users", new { Area = "Admin" }, htmlAttributes: new { title = LocalizationService.Translate(Message.Users), role = "menuitem" })</li>
                     }
                     
                     <li role="presentation" class="divider"></li>
