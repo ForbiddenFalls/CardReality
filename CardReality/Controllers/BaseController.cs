@@ -8,7 +8,9 @@ using System.Web.Mvc;
 using CardReality.Data;
 using CardReality.Data.Data;
 using CardReality.Data.Models;
+using CardReality.Enums;
 using CardReality.Models;
+using CardReality.Services;
 using Microsoft.AspNet.Identity;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
@@ -28,6 +30,7 @@ namespace CardReality.Controllers
         {
             this.Data = data;
             InitializeStorage();
+            
         }
 
         protected IApplicationData Data 
@@ -44,10 +47,19 @@ namespace CardReality.Controllers
             {
                 Player player = this.Data.Players.Find(identity.GetUserId());
                 isSubscribed = player.BattleSubscribed;
+                var lang = this.Request.QueryString["lang"];
+                if (lang != null && !string.IsNullOrEmpty(lang))
+                {
+                    player.CurrentLang = ((Language)Enum.Parse(typeof (Language), lang)).ToString();
+                    ApplicationDbContext.Create().SaveChanges();
+                }
+
+                LocalizationService.CurrentLanguage = ((Language) Enum.Parse(typeof (Language), player.CurrentLang));
             }
 
             this.ViewData["isSubscribed"] = isSubscribed;
 
+            
             base.OnActionExecuting(filterContext);
         }
 

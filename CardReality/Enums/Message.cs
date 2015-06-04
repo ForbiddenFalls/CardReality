@@ -38,6 +38,7 @@
         CleanCode,
         CleanCodeInfo,
         HighQuality,
-        HighQualityInfo
+        HighQualityInfo,
+        Language
     }
 }

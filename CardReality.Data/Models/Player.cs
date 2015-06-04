@@ -57,11 +57,14 @@ namespace CardReality.Data.Models
 
         public bool BattleSubscribed { get; set; }
 
+        public string CurrentLang { get; set; }
+
         public Player()
         {
             this.Deck = new List<PlayerCard>();
             this.Hand = new List<BattleHand>();
             this.BattleSubscribed = false;
+            this.CurrentLang = "En";
         }
 
         public void ReturnCardsToDeck(Battle battle)

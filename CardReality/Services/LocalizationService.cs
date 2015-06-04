@@ -125,6 +125,9 @@ namespace CardReality.Services
                     {
                         Message.HighQualityInfo, "In the end of all this we came up with an awesome project build from the ForbiddenCity Team"
                     },
+                    {
+                        Message.Language, "Language"
+                    },
                 }
             },
             {
@@ -241,7 +244,9 @@ namespace CardReality.Services
                     {
                         Message.HighQualityInfo, "В края на деня пред вас е продукт от най-високо качество разработен от ForbiddenCity Team"
                     },
-
+                    {
+                        Message.Language, "Език"
+                    },
                 }
             }
         };

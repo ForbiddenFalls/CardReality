@@ -12,7 +12,7 @@ namespace CardReality
         {
             ConfigureAuth(app);
             app.MapSignalR();
-            LocalizationService.CurrentLanguage = Language.Bg;
+            LocalizationService.CurrentLanguage = Language.En;
         }
     }
 }

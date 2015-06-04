@@ -11,12 +11,19 @@
         <ul class="nav navbar-nav navbar-right">
             <li id="pool">
                 @{ var isSubscribed = false; }
-                @if ((bool)ViewData["isSubscribed"])
+                @if ((bool) ViewData["isSubscribed"])
                 {
                     isSubscribed = true;
                 }
                 <span><a class="btn btn-system" id="unsubscribe" href="#" @(isSubscribed ? "style=display:block" : "style=display:none")>@LocalizationService.Translate(Message.ExitBattle)</a></span>
                 <span><a class="btn btn-system" id="subscribe" href="#" @(!isSubscribed ? "style=display:block" : "style=display:none")>@LocalizationService.Translate(Message.ToBattle)</a></span>
+            </li>
+            <li>
+                <a href="#">@LocalizationService.Translate(Message.Language)</a>
+                <ul class="dropdown">
+                    <li role="presentation"><a href="?lang=En">English</a> </li>
+                    <li role="presentation"><a href="?lang=Bg">Bulgarian</a> </li>
+                </ul>
             </li>
             <li>
                 <a href="#">@LocalizationService.Translate(Message.Hello) @User.Identity.GetUserName()<b class="caret"></b></a>
