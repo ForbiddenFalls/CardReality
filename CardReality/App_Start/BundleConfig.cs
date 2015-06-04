@@ -22,7 +22,7 @@ namespace CardReality
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/respond.js"));
 
-            bundles.Add(new ScriptBundle("~/theme-scripts").Include(
+            bundles.Add(new ScriptBundle("~/Content/ThemeJs").Include(
                 "~/Content/js/jquery-migrate-1.2.1.min.js",
                 "~/Content/js/jquery.isotope.min.js",
                 "~/Content/js/jquery.appear.js",
@@ -34,7 +34,7 @@ namespace CardReality
                 "~/Content/js/nivo-lightbox.min.js",
                 "~/Content/js/script.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new StyleBundle("~/Content/SiteCss").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/jquery-ui.min.css",
                 "~/Content/css/font-awesome.min.css",
