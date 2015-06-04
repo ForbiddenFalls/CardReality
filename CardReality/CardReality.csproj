@@ -216,6 +216,7 @@
     <Compile Include="Areas\Battles\Controllers\PoolController.cs" />
     <Compile Include="Areas\Battles\Core\Battle.cs" />
     <Compile Include="Controllers\CardsController.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\RankingController.cs" />
     <Compile Include="Enums\Language.cs" />
@@ -308,6 +309,7 @@
     <Content Include="Content\Images\RoYaL-card.png" />
     <Content Include="Content\Images\covers\cover-1.png" />
     <Content Include="Content\Images\map.png" />
+    <Content Include="Scripts\Battles\duel.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -387,6 +389,8 @@
     <Content Include="Views\Shared\_carouselPartial.cshtml" />
     <Content Include="Views\Shared\_teamPartial.cshtml" />
     <Content Include="Views\Shared\_footerPartial.cshtml" />
+    <Content Include="Views\Errors\Index.cshtml" />
+    <Content Include="Views\Errors\NotFound404.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
