@@ -53,8 +53,10 @@ namespace CardReality.Controllers
 
         private void InitializeStorage()
         {
+            var connectionStrings = ConfigurationManager.ConnectionStrings["AzureWebJobsStorage"];
+            var textConnectionstrings = connectionStrings.ToString();
             // Open storage account using credentials from .cscfg file.
-            var storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["AzureWebJobsStorage"].ToString());
+            var storageAccount = CloudStorageAccount.Parse(textConnectionstrings);
 
             // Get context object for working with blobs, and 
             // set a default retry policy appropriate for a web user interface.
