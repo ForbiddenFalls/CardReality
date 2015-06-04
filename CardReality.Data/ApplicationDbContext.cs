@@ -1,8 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace CardReality.Data
+﻿namespace CardReality.Data
 {
+    using System;
     using System.Data.Entity;
 
     using Microsoft.AspNet.Identity.EntityFramework;
