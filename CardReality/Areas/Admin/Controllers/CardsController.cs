@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -70,9 +71,8 @@ namespace CardReality.Areas.Admin
                 var admin = this.Data.Players.All().FirstOrDefault(p => p.UserName == "admin");
                 var playerCard = new PlayerCard
                 {
-                    Player = admin,
-                    PlayerId = admin.Id,
-                    Card = card
+                    Card = card,
+                    BoughtFor = 0
                 };
                 admin.Deck.Add(playerCard);
                 this.Data.Cards.Add(card);
@@ -146,9 +146,13 @@ namespace CardReality.Areas.Admin
         }
 
         // GET: Admin/Cards/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            var card = this.Data.Cards.All().FirstOrDefault(c => c.Id == id);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var card = this.Data.Cards.Find(id);
             if (card == null)
             {
                 return HttpNotFound();
@@ -161,22 +165,10 @@ namespace CardReality.Areas.Admin
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            try
-            {
-                var card = this.Data.Cards.All().FirstOrDefault(c => c.Id == id);
-                if (card == null)
-                {
-                    return HttpNotFound();
-                }
-
-                this.Data.Cards.Delete(card);
-                this.Data.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            var card = this.Data.Cards.Find(id);
+            this.Data.Cards.Delete(card);
+            this.Data.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

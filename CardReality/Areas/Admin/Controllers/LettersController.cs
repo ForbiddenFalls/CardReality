@@ -45,8 +45,7 @@ namespace CardReality.Areas.Admin.Controllers
 
                 this.Data.Letters.Add(letter);
                 this.Data.SaveChanges();
-                var letters = this.Data.Letters.All();
-                return RedirectToAction("Index", letters);
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -113,8 +112,7 @@ namespace CardReality.Areas.Admin.Controllers
                 }
                 this.Data.Letters.Delete(letter);
                 this.Data.SaveChanges();
-                var letters = this.Data.Letters.All();
-                return RedirectToAction("Index", letters);
+                return RedirectToAction("Index");
             }
             catch
             {
