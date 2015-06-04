@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using PagedList;
 
 using CardReality.Data.Data;
+using CardReality.Data.Models;
 using CardReality.Models;
 
 namespace CardReality.Controllers
@@ -16,6 +18,13 @@ namespace CardReality.Controllers
 
         public RankingController(IApplicationData data) : base(data)
         {
+            Mapper.CreateMap<Player, RankingViewModel>()
+                .ForMember(
+                    rm => rm.Ratio, 
+                    pm => pm.MapFrom(
+                        p => p.Wins + p.Loss == 0 ? 0 : Math.Round(p.Wins / (double)(p.Wins + p.Loss), 4) * 100
+                    )
+                );
         }
 
         // GET: Ranking
@@ -38,14 +47,8 @@ namespace CardReality.Controllers
             ViewBag.CurrentFilter = searchString;
 
             var players = this.Data.Players.All()
-                .Select(p => new RankingViewModel
-                {
-                    Id = p.Id,
-                    UserName = p.UserName,
-                    Wins = p.Wins,
-                    Loss = p.Loss,
-                    Ratio = p.Wins + p.Loss == 0 ? 0 : Math.Round(p.Wins/(double) (p.Wins + p.Loss), 4)*100
-                }).AsQueryable();
+                .Project()
+                .To<RankingViewModel>();
 
             if (!String.IsNullOrEmpty(searchString))
             {
